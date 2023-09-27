@@ -4,7 +4,7 @@ import {MatExpansionModule} from "@angular/material/expansion";
 import {MatListModule} from "@angular/material/list";
 import {MatOptionModule} from "@angular/material/core";
 import {MatButtonModule} from "@angular/material/button";
-import {Product, ProductCategory} from "../../models/product.model";
+import {ProductCategory} from "../../models/product.model";
 
 @Component({
   selector: 'app-filters',
@@ -14,7 +14,7 @@ import {Product, ProductCategory} from "../../models/product.model";
   styleUrls: ['./filters.component.css']
 })
 export class FiltersComponent {
-  @Input() categories: Array<ProductCategory>| undefined;
+  @Input() categories: Array<ProductCategory> | undefined;
   @Output() showCategory = new EventEmitter<string>();
 
 

@@ -1,4 +1,3 @@
-
 import {Component, OnInit} from '@angular/core';
 import {MatToolbarModule} from "@angular/material/toolbar";
 import {MatIconModule} from "@angular/material/icon";
@@ -19,7 +18,7 @@ import {CartService} from "./cart/data-access/cart.service";
     RouterLink,
     RouterOutlet,
     HeaderComponent,
-],
+  ],
   standalone: true,
 })
 export class AppComponent implements OnInit {
@@ -37,7 +36,6 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.clear();
     this.cartService.cart.subscribe((_cart) => {
       this.cart = _cart;
     });

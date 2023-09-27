@@ -19,3 +19,4 @@ export interface ProductCategory {
     "description": string;
   };
 }
+

@@ -48,7 +48,6 @@ export class CartComponent implements OnInit {
   }
 
 
-
   onClearCart(): void {
     this.cartService.clearCart();
   }
@@ -59,7 +58,7 @@ export class CartComponent implements OnInit {
   }
 
   onIncreaseQuantity(cart_product: CartProduct): void {
-    this.cartService.addToCart(cart_product);
+    this.cartService.addToCart(cart_product.product_id, 1);
   }
 
   onDecreaseQuantity(cart_product: CartProduct): void {

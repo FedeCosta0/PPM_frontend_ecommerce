@@ -1,7 +1,14 @@
 export interface User {
-  "id": string;
-  "email": string;
-  "password": string;
-  "first_name": string;
-  "last_name": string;
+
+  _expiry: Date,
+  _token: string,
+  user: {
+    id: string,
+    email: string,
+    first_name: string,
+    last_name: string,
+    is_admin: boolean
+  }
+
+
 }

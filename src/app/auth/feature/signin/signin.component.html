@@ -1,12 +1,12 @@
-<form [formGroup]="signinForm" (ngSubmit)="onSubmit()" class="form text-center mx-auto my-3">
+<form (ngSubmit)="onSubmit()" [formGroup]="signinForm" class="form text-center mx-auto my-3">
   <h1>Sign In</h1>
   <mat-form-field appearance="fill" class="full-width">
     <mat-label>Email</mat-label>
-    <input matInput type="email" name="email" formControlName="email"/>
+    <input formControlName="email" matInput name="email" type="email"/>
   </mat-form-field>
   <mat-form-field appearance="fill" class="full-width">
     <mat-label>Password</mat-label>
-    <input matInput type="password" name="password" formControlName="password"/>
+    <input formControlName="password" matInput name="password" type="password"/>
   </mat-form-field>
-  <button mat-raised-button color="primary" type="submit" [disabled]="!signinForm.valid">Sign In</button>
+  <button [disabled]="!signinForm.valid" color="primary" mat-raised-button type="submit">Sign In</button>
 </form>

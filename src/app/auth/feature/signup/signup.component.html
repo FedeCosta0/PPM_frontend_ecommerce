@@ -1,26 +1,24 @@
-
-
-<form [formGroup]="signupForm" (ngSubmit)="onSubmit()" class="form text-center mx-auto my-3">
+<form (ngSubmit)="onSubmit()" [formGroup]="signupForm" class="form text-center mx-auto my-3">
   <h1>Sign Up</h1>
   <mat-form-field appearance="fill" class="full-width">
     <mat-label>Email</mat-label>
-    <input matInput type="email" name="email" formControlName="email"/>
+    <input formControlName="email" matInput name="email" type="email"/>
   </mat-form-field>
   <mat-form-field appearance="fill" class="full-width">
     <mat-label>Password</mat-label>
-    <input matInput type="password" name="password" formControlName="password"/>
+    <input formControlName="password" matInput name="password" type="password"/>
   </mat-form-field>
   <mat-form-field appearance="fill" class="full-width">
     <mat-label>Repeat Password</mat-label>
-    <input matInput type="password" name="password2" formControlName="password2"/>
+    <input formControlName="password2" matInput name="password2" type="password"/>
   </mat-form-field>
   <mat-form-field appearance="fill" class="full-width">
     <mat-label>First Name</mat-label>
-    <input matInput type="text" name="first_name" formControlName="first_name"/>
+    <input formControlName="first_name" matInput name="first_name" type="text"/>
   </mat-form-field>
   <mat-form-field appearance="fill" class="full-width">
     <mat-label>Last Name</mat-label>
-    <input matInput type="text" name="last_name" formControlName="last_name"/>
+    <input formControlName="last_name" matInput name="last_name" type="text"/>
   </mat-form-field>
-  <button mat-raised-button color="primary" type="submit" [disabled]="!signupForm.valid">Sign Up</button>
+  <button [disabled]="!signupForm.valid" color="primary" mat-raised-button type="submit">Sign Up</button>
 </form>

@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {MatToolbarModule} from "@angular/material/toolbar";
 import {RouterLink} from "@angular/router";
@@ -6,8 +6,9 @@ import {MatIconModule} from "@angular/material/icon";
 import {MatBadgeModule} from "@angular/material/badge";
 import {MatButtonModule} from "@angular/material/button";
 import {MatMenuModule} from "@angular/material/menu";
-import {Cart, CartProduct} from "../../../cart/models/cart.model";
+import {Cart} from "../../../cart/models/cart.model";
 import {CartService} from "../../../cart/data-access/cart.service";
+import {AuthService} from "../../../auth/data-access/auth.service";
 
 @Component({
   selector: 'app-header',
@@ -16,10 +17,10 @@ import {CartService} from "../../../cart/data-access/cart.service";
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnInit {
   itemsQuantity = 0;
 
-  constructor(private cartService: CartService) {
+  constructor(private cartService: CartService, private authService: AuthService) {
   }
 
   private _cart: Cart = {
@@ -43,8 +44,27 @@ export class HeaderComponent {
       .reduce((prev, current) => prev + current, 0)
   }
 
+  ngOnInit() {
+    this.cartService.getCart();
+  }
 
   onClearCart() {
     this.cartService.clearCart();
+  }
+
+  isUserLogged(): boolean {
+    return (localStorage.getItem('user') !== null);
+  }
+
+  isUserAdmin(): boolean{
+    if(localStorage.getItem('user') != null){
+      // @ts-ignore
+      return JSON.parse(localStorage.getItem('user'))['user']['is_admin']
+    }
+    return false;
+  }
+
+  onLogout() {
+    this.authService.logout();
   }
 }

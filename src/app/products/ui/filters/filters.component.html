@@ -3,7 +3,8 @@
     <mat-panel-title> CATEGORIES</mat-panel-title>
   </mat-expansion-panel-header>
   <mat-selection-list [multiple]="false">
-    <mat-list-option *ngFor="let category of categories" [value]="category.attributes.name" (click)="onShowCategory(category.attributes.name)">
+    <mat-list-option (click)="onShowCategory(category.attributes.name)" *ngFor="let category of categories"
+                     [value]="category.attributes.name">
       {{category.attributes.name}}
     </mat-list-option>
   </mat-selection-list>

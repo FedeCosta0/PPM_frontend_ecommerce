@@ -1,19 +1,66 @@
-import { Injectable } from '@angular/core';
-import {HttpClient} from "@angular/common/http";
+import {Injectable} from '@angular/core';
+import {HttpClient, HttpHeaders} from "@angular/common/http";
+import {User} from "../models/user.model";
+import {CartService} from "../../cart/data-access/cart.service";
 
-const STORE_BASE_URL = 'http://127.0.0.1:8000';
+const BASE_URL = 'https://web-production-db80.up.railway.app';
+
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  constructor(private http: HttpClient) { }
+  user: User | undefined;
 
-  signUp(body: {}){
-    return this.http.post(`${STORE_BASE_URL}/users/`, body);
+
+  constructor(private http: HttpClient, private cartService: CartService) {
   }
 
-  signIn(body: {}){
-    return this.http.post(`${STORE_BASE_URL}/login/`, body);
+  signUp(body: {}) {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/vnd.api+json',
+      })
+    };
+    return this.http.post(`${BASE_URL}/users/`, body, httpOptions);
+  }
+
+  signIn(body: {}) {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/vnd.api+json',
+      })
+    };
+    return this.http.post(`${BASE_URL}/login/`, body);
+
+  }
+
+  logout() {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Authorization': `Token ${JSON.parse(localStorage.getItem('user')!)._token}`,
+        'Content-Type': 'application/vnd.api+json'
+      })
+    };
+    this.user = undefined;
+    localStorage.removeItem('user');
+    let observable = this.http.post(`${BASE_URL}/logout/`, {});
+    this.cartService.getCart();
+    return observable;
+
+  }
+
+  createUser(id: string, email: string, firstName: string, lastName: string, token: string, expirationDate: Date, isAdmin: boolean) {
+    this.user = {
+      '_expiry': expirationDate,
+      '_token': token,
+      'user': {
+        'id': id,
+        'email': email,
+        'first_name': firstName,
+        'last_name': lastName,
+        'is_admin': isAdmin
+      }
+    }
   }
 }

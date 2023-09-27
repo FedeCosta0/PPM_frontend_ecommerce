@@ -9,8 +9,8 @@ export interface Cart {
 }
 
 export interface CartProduct {
-  "product_id": string;
   "id": string;
+  "product_id": string;
   "name": string;
   "price": number;
   "quantity": number;

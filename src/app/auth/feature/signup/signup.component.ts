@@ -1,9 +1,10 @@
 import {Component, OnInit} from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {CommonModule} from '@angular/common';
 import {MatInputModule} from "@angular/material/input";
 import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
 import {MatButtonModule} from "@angular/material/button";
 import {AuthService} from "../../data-access/auth.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-signup',
@@ -12,10 +13,7 @@ import {AuthService} from "../../data-access/auth.service";
   templateUrl: './signup.component.html',
   styleUrls: ['./signup.component.css']
 })
-export class SignupComponent implements OnInit{
-
-  constructor(private authService: AuthService) {
-  }
+export class SignupComponent implements OnInit {
 
   signupForm: FormGroup = new FormGroup({
     'email': new FormControl(''),
@@ -25,7 +23,10 @@ export class SignupComponent implements OnInit{
     'last_name': new FormControl('')
   });
 
-  ngOnInit(): void{
+  constructor(private authService: AuthService, private router: Router) {
+  }
+
+  ngOnInit(): void {
     this.signupForm = new FormGroup({
       'email': new FormControl(null, [Validators.required, Validators.email]),
       'password': new FormControl(null, Validators.required),
@@ -35,7 +36,7 @@ export class SignupComponent implements OnInit{
     })
   }
 
-  onSubmit(){
+  onSubmit() {
     console.log(this.signupForm);
     const email = this.signupForm.value.email;
     const password = this.signupForm.value.password;
@@ -48,8 +49,11 @@ export class SignupComponent implements OnInit{
       password2: password2,
       first_name: first_name,
       last_name: last_name
-    }).subscribe(data => {console.log(data)})
+    }).subscribe(data => {
+      console.log(data)
+    })
     this.signupForm.reset();
+    this.router.navigateByUrl('/')
 
   }
 }

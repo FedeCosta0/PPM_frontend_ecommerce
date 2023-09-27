@@ -21,7 +21,7 @@ const ROWS_HEIGHT: { [id: number]: number } = {1: 400, 3: 335, 4: 350};
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent implements OnInit, OnDestroy{
+export class HomeComponent implements OnInit, OnDestroy {
   cols = 3;
   rowHeight = ROWS_HEIGHT[this.cols];
   category: string | undefined;
@@ -38,18 +38,24 @@ export class HomeComponent implements OnInit, OnDestroy{
   ngOnInit(): void {
     this.getProducts();
     this.getCategories();
+
   }
 
-  getProducts(): void{
+  getProducts(): void {
     this.productsSubscription = this.productsService.getAllProducts(this.count, this.sort).subscribe(
-      (_products: any) => { this.products = _products['data'];});
+      (_products: any) => {
+        this.products = _products['data'];
+      });
   }
 
-  getCategories(): void{
+  getCategories(): void {
     this.productsCategoriesSubscription = this.productsService.getAllCategories().subscribe(
-      (_categories: any) => {this.categories = _categories['data'];}
+      (_categories: any) => {
+        this.categories = _categories['data'];
+      }
     )
   }
+
 
   onColumnsCountChange(colsNumber: number): void {
     this.cols = colsNumber;
@@ -61,18 +67,11 @@ export class HomeComponent implements OnInit, OnDestroy{
   }
 
   onAddToCart(product: Product): void {
-    this.cartService.addToCart({
-      product_id: product.id,
-      id: "",
-      name: product.attributes.name,
-      price: +product.attributes.price,
-      quantity: 1,
-
-    });
+    this.cartService.addToCart(product.id, 1);
   }
 
   ngOnDestroy() {
-    if(this.productsSubscription){
+    if (this.productsSubscription) {
       this.productsSubscription.unsubscribe();
     }
   }

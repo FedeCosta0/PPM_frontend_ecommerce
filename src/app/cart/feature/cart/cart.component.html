@@ -3,10 +3,10 @@
     <ng-container matColumnDef="product">
       <th *matHeaderCellDef mat-header-cell>Product</th>
       <td *matCellDef="let element" mat-cell>
-        <img alt="product" class="w-[100px] my-5" src="{{element.product}}"/>
+        <img alt="product" class="w-[100px] my-5" src="https://via.placeholder.com/150"/>
       </td>
       <td *matFooterCellDef mat-footer-cell>
-        <button mat-raised-button routerLink="/home">Continue shopping</button>
+        <button mat-raised-button routerLink="">Continue shopping</button>
       </td>
     </ng-container>
     <ng-container matColumnDef="name">
@@ -75,6 +75,6 @@
 <mat-card *ngIf="!cart.attributes.cart_products.length" class="max-w-7xl mx-auto">
   <p>
     Your cart is empty.
-    <button mat-raised-button routerLink="/home">Start shopping</button>
+    <button mat-raised-button routerLink="">Start shopping</button>
   </p>
 </mat-card>

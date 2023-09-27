@@ -1,9 +1,12 @@
 <mat-toolbar class="max-w-7xl mx-auto border-x justify-between">
-  <a routerLink="home">e-commerce</a>
-  <a routerLink="signup">sign up</a>
-  <a routerLink="signin">sign in</a>
+  <a routerLink="">e-commerce</a>
+  <a *ngIf="isUserAdmin()" routerLink="admin">admin</a>
+  <a *ngIf="!isUserLogged()" routerLink="signup">sign up</a>
+  <a *ngIf="!isUserLogged()" routerLink="signin">sign in</a>
+  <button (click)="onLogout()" *ngIf="isUserLogged()">logout</button>
   <button [matMenuTriggerFor]="menu" mat-icon-button>
-    <mat-icon [matBadgeHidden]="!itemsQuantity" [matBadge]="itemsQuantity" aria-hidden="false" aria-label="Shopping Cart"
+    <mat-icon [matBadgeHidden]="!itemsQuantity" [matBadge]="itemsQuantity" aria-hidden="false"
+              aria-label="Shopping Cart"
               fontIcon="shopping_cart" matBadgeColor="warn"></mat-icon>
   </button>
   <mat-menu #menu="matMenu">

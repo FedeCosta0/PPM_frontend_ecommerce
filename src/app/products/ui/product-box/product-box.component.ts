@@ -21,7 +21,6 @@ export class ProductBoxComponent {
 
   onAddToCart(): void {
     this.addToCart.emit(this.product);
-    //console.log('product-box.component.ts onAddToCart method reached!')
   }
 
 }

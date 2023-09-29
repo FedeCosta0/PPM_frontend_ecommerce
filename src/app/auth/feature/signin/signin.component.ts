@@ -40,10 +40,9 @@ export class SigninComponent {
       password: password,
     }).subscribe((data: any) => {
 
-      data = data['data']
-
-      this.authService.createUser(data.user.id, data.user.email, data.user.first_name, data.user.last_name, data.token, data.expiry, data.user.is_admin)
-
+      let _data = data['data']
+      console.log(_data)
+      this.authService.createUser(_data.user.id, _data.user.email, _data.user.first_name, _data.user.last_name, _data.token, _data.expiry, _data.user.is_admin)
       localStorage.setItem('user', JSON.stringify(this.authService.user))
       this.signinForm.reset();
       this.cartService.getCart();

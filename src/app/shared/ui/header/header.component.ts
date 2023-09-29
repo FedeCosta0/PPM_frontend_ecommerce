@@ -59,6 +59,7 @@ export class HeaderComponent implements OnInit {
   isUserAdmin(): boolean{
     if(localStorage.getItem('user') != null){
       // @ts-ignore
+      // @ts-ignore
       return JSON.parse(localStorage.getItem('user'))['user']['is_admin']
     }
     return false;

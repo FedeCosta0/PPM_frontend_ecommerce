@@ -14,22 +14,27 @@ import {MatIconModule} from "@angular/material/icon";
 })
 export class ProductsHeaderComponent {
   @Output() columnsCountChange = new EventEmitter<number>();
-  sort = 'desc';
+  @Output() itemsCountChange = new EventEmitter<number>();
+  @Output() sortChange = new EventEmitter<string>();
   itemsShowCount = 12;
+  sort = '';
+
 
   constructor() {
   }
 
-  onSortUpdated(newSort: string): void {
-    this.sort = newSort;
+  onColumnsUpdated(colsNum: number): void {
+    this.columnsCountChange.emit(colsNum);
   }
 
   onItemsUpdated(count: number): void {
+    this.itemsCountChange.emit(count);
     this.itemsShowCount = count;
   }
 
-  onColumnsUpdated(colsNum: number): void {
-    this.columnsCountChange.emit(colsNum);
+  onSortUpdated(newSort: string): void {
+    this.sortChange.emit(newSort);
+    this.sort = newSort;
   }
 
 }

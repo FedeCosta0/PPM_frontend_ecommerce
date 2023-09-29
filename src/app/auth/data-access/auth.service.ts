@@ -5,6 +5,7 @@ import {CartService} from "../../cart/data-access/cart.service";
 
 const BASE_URL = 'https://web-production-db80.up.railway.app';
 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -31,7 +32,7 @@ export class AuthService {
         'Content-Type': 'application/vnd.api+json',
       })
     };
-    return this.http.post(`${BASE_URL}/login/`, body);
+    return this.http.post(`${BASE_URL}/login/`, body, httpOptions);
 
   }
 
@@ -44,7 +45,7 @@ export class AuthService {
     };
     this.user = undefined;
     localStorage.removeItem('user');
-    let observable = this.http.post(`${BASE_URL}/logout/`, {});
+    let observable = this.http.post(`${BASE_URL}/logout/`, {}, httpOptions);
     this.cartService.getCart();
     return observable;
 

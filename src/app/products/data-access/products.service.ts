@@ -10,14 +10,29 @@ const BASE_URL = 'https://web-production-db80.up.railway.app';
 })
 export class ProductsService {
 
-  constructor(private httpClient: HttpClient) {
-  }
+  constructor(private httpClient: HttpClient) {}
 
-  getAllProducts(limit = '12', sort = 'desc'): Observable<Array<Product>> {
-    return this.httpClient.get<Array<Product>>(
-      `${BASE_URL}/products/`
-    )
-  }
+
+  getProducts(
+    sort = 'desc',
+    pageIndex?: number,
+    category?: string,
+  ): Observable<Array<Product>> {
+
+      return this.httpClient.get<Array<Product>>(
+        `${BASE_URL}/products${category ? '?category=' + category  + `${sort ? '&ordering=' + sort : ''}` + `${pageIndex ? '&page=' + pageIndex : ''}`: `${sort ? '?ordering=' + sort + `${pageIndex ? '&page=' + pageIndex : ''}` : `${pageIndex ? '?page=' + pageIndex : ''}`}`}`
+      );
+
+    }
+
+    getAllProducts() : Observable<number>{
+      return this.httpClient.get<number>(
+        `${BASE_URL}/products-count/`
+      );
+    }
+
+
+
 
 
   getAllCategories(): Observable<Array<ProductCategory>> {
